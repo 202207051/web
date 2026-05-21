@@ -23,39 +23,39 @@
                     <a class="nav-link" href="/posts">게시글</a>
                 </li>
             </ul>
-            <ul class="navbar-nav before">
+            <ul class="navbar-nav login">
                 <li class="nav-item">
                     <a class="nav-link active" href="/users/login">로그인</a>
                 </li>
             </ul>
-            <ul class="navbar-nav after">
+            <ul class="navbar-nav logout">
                 <li class="nav-item">
                     <a class="nav-link sname active" href="#"></a>
-                </li>                
+                </li>
                 <li class="nav-item">
                     <a class="nav-link logout active" href="#">로그아웃</a>
                 </li>
-            </ul>            
+            </ul>
         </div>
     </div>
 </nav>
 <script>
-    $(".logout").on("click", function(e){
+    $(".logout").on("click", function (e) {
         e.preventDefault();
-        if(confirm("정말로 로그아웃하실래요?")){
+        if (confirm("정말로 로그아웃하실래요?")) {
             sessionStorage.clear();
-            location.href='/';
+            location.href = '/';
         }
     })
 
-    const sname=sessionStorage.getItem("sname");
-    const scode=sessionStorage.getItem("scode");
-if(scode){
-$(".login").hide(); $(".logout").show();
-$(".logout .scode a").html(`${sname}(${scode})`);
-}else{
-$(".login").show(); $(".logout").hide();
-}
+    const sname = sessionStorage.getItem("sname");
+    const scode = sessionStorage.getItem("scode");
+    if (scode) {
+        $(".login").hide(); $(".logout").show();
+        $(".logout .scode a").html(`${sname}(${scode})`);
+    } else {
+        $(".login").show(); $(".logout").hide();
+    }
 
     // $(document).ready(function(){
     //     const pathname=window.location.pathname;
