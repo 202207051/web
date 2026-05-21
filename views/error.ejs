@@ -1,0 +1,29 @@
+<div class="row justify-content-center my-5">
+  <div class="col col-md-8 col-lg-6">
+    <div class="card border-danger">
+      <div class="card-header bg-danger text-white text-center">
+        <h3 class="mb-0">⚠️ 오류가 발생했습니다</h3>
+      </div>
+      <div class="card-body p-4">
+        <h4 class="text-danger mb-2">에러 메시지: <%= message %></h4>
+        <h5 class="text-muted mb-4">상태 코드: <%= error.status %></h5>
+        
+        <hr>
+        
+        <p class="text-secondary mb-3" style="font-size: 0.95rem;">
+          <strong>시스템 관리자:</strong> 박영환
+        </p>
+        
+        <p class="text-muted small mb-1">정밀 에러 로그 (Stack Trace):</p>
+        <div class="bg-light p-3 border rounded" style="max-height: 200px; overflow-y: auto;">
+          <pre class="mb-0" style="font-size: 0.85rem; color: #555;"><%= error.stack %></pre>
+        </div>
+        
+        <div class="text-center mt-4">
+          <a href="/" class="btn btn-secondary me-2">홈으로 이동</a>
+          <button onclick="history.back();" class="btn btn-primary">이전 화면</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

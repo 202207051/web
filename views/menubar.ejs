@@ -1,0 +1,72 @@
+<nav class="navbar navbar-expand-lg bg-primary mb-4" data-bs-theme="dark">
+<div class="container-fluid">
+  <a class="navbar-brand fw-bold" href="/">학사관리</a>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <li class="nav-item">
+        <a class="nav-link" aria-current="page" href="/">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" aria-current="page" href="/haksa/pro">교수관리</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" aria-current="page" href="/haksa/stu">학생관리</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" aria-current="page" href="/haksa/cou">강좌관리</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" aria-current="page" href="/posts">게시판</a>
+      </li>
+    </ul>
+
+    <ul class="navbar-nav" id="before">
+      <li class="nav-item">
+        <a class="nav-link" aria-current="page" href="/users/login">로그인</a>
+      </li>
+    </ul>
+
+    <ul class="navbar-nav" id="after" style="display: none;">
+      <li class="nav-item">
+        <a class="nav-link fw-bold" href="#" id="menu_id" style="color: #fff;">사용자</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" id="logout">로그아웃</a>
+      </li>
+    </ul>
+  </div>
+</div>
+</nav>
+
+<script>
+    $(document).ready(function(){
+        // [기본 기능] 현재 주소(URL)를 감지하여 메뉴바의 해당 버튼을 활성화(Active)하는 로직입니다
+        const pathname = window.location.pathname; 
+        const path = pathname.split('/').slice(0, 3).join('/'); 
+        $(".nav-link").removeClass('active');
+        $(`.nav-link[href='${path}']`).addClass('active');
+
+        // [추가 연동] 브라우저 보관함(localStorage) 체크를 통한 로그인 세션 제어
+        const loginId = localStorage.getItem("id");
+        if(loginId) {
+            $("#before").hide();
+            $("#after").show();
+            $("#menu_id").html(`${loginId}님`);
+        } else {
+            $("#before").show();
+            $("#after").hide();
+        }
+
+        // 로그아웃 클릭 이벤트 처리
+        $("#logout").on("click", function(e){
+            e.preventDefault();
+            if(confirm("정말로 로그아웃 하실래요?")) {
+                localStorage.clear(); // 로그인 정보 삭제
+                location.href = "/";  // 메인 홈으로 이동
+            }
+        });
+    });
+</script>

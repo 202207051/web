@@ -1,0 +1,59 @@
+<div class="my-5">
+    <h1 class="text-center mb-5 fw-bold text-primary"><%=title%></h1>
+
+    <div class="row mb-3">
+        <div class="col-md-4">
+            <button class="btn btn-primary" id="btn-insert">새로운 강좌 개설</button>
+        </div>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-body p-0">
+            <table class="table table-hover table-striped mb-0 text-center align-middle">
+                <thead class="table-primary">
+                    <tr>
+                        <th style="width: 15%;">과목코드</th>
+                        <th style="width: 35%;">과목명</th>
+                        <th style="width: 15%;">학점</th>
+                        <th style="width: 20%;">담당교수</th>
+                        <th style="width: 15%;">수정 / 삭제</th>
+                    </tr>
+                </thead>
+                <tbody id="div-courses"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script id="temp-courses" type="text/x-handlebars-template">
+    {{#each .}}
+    <tr>
+        <td class="fw-bold text-secondary">{{CCODE}}</td>
+        <td class="text-start ps-4">{{CNAME}}</td>
+        <td><span class="badge bg-info text-dark fw-bold">{{HOURS}}학점</span></td>
+        <td>{{PNAME}} 교수</td>
+        <td>
+            <button class="btn btn-success btn-sm me-1 btn-update" ccode="{{CCODE}}">수정</button>
+            <button class="btn btn-danger btn-sm btn-delete" ccode="{{CCODE}}">삭제</button>
+        </td>
+    </tr>
+    {{/each}}
+</script>
+
+<script>
+    // 페이지가 로드되면 자동으로 강좌 목록을 불러옵니다
+    getCourses();
+
+    function getCourses() {
+        // 임시 샘플 데이터 구조 (추후 백엔드 DB 연동 완료 시 $.ajax 코드로 대체됩니다)
+        const sampleData = [
+            { CCODE: 'C101', CNAME: '데이터베이스 기초', HOURS: 3, PNAME: '박영환' },
+            { CCODE: 'C102', CNAME: 'Node.js 웹 프로그래밍', HOURS: 3, PNAME: '이핑크' },
+            { CCODE: 'C103', CNAME: '자바스크립트 객체지향', HOURS: 2, PNAME: '김블루' }
+        ];
+
+        // 핸들바 템플릿에 데이터 컴파일 후 화면에 출력
+        const temp = Handlebars.compile($("#temp-courses").html());
+        $("#div-courses").html(temp(sampleData));
+    }
+</script>

@@ -1,0 +1,53 @@
+<div class="row justify-content-center my-5">
+  <div class="col col-xl-4 col-lg-5 col-md-6 col-sm-8">
+    <div class="card shadow-sm">
+      <div class="card-header bg-primary text-white text-center p-3">
+        <h3 class="mb-0 fw-bold">학사관리 로그인</h3>
+      </div>
+      <div class="card-body p-4">
+        <form name="frm">
+          <div class="mb-3">
+            <label class="form-label small text-muted">아이디</label>
+            <input name="id" class="form-control" placeholder="아이디를 입력하세요" required autofocus />
+          </div>
+          <div class="mb-4">
+            <label class="form-label small text-muted">비밀번호</label>
+            <input name="pass" type="password" class="form-control" placeholder="비밀번호를 입력하세요" required />
+          </div>
+          <button type="submit" class="btn btn-primary w-100 p-2 fw-bold">로그인</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+$(frm).on("submit", function(e){
+  e.preventDefault(); // 페이지 새로고침 방지
+  
+  const id = $(frm.id).val();
+  const pass = $(frm.pass).val();
+  
+  // 백엔드 routes/users.js의 /login API로 데이터를 보냅니다.
+  $.ajax({
+    type: 'post',
+    url: '/users/login',
+    data: { id, pass },
+    success: function(data){
+      if(data == 1){
+        // 로그인 성공 시 브라우저 보관함에 아이디 저장 후 홈으로 이동
+        localStorage.setItem('id', id);
+        location.href = '/';
+      } else if(data == 2) {
+        alert('비밀번호가 일치하지 않습니다!');
+      } else if(data == 0){
+        alert('아이디가 존재하지 않습니다.');
+      }
+    },
+    error: function(err) {
+      alert('로그인 처리 중 오류가 발생했습니다.');
+      console.error(err);
+    }
+  });
+});
+</script>
