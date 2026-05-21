@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const { getConnection } = require('../connect');
+const { getConnection } = require('../routes/connect');
 const { outFormat } = require('oracledb');
 const OracleDB = require('oracledb');
 
