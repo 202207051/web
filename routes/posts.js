@@ -20,6 +20,13 @@ router.get('/list.json', async function(req, res) {
         const word = req.query.word ? req.query.word : '';
         const size = 5; // 한 페이지당 보여줄 게시글 수
         
+        // sdql = "select count(*) from posts;"
+        // result = await con.execute(sql);
+        // const list = result.rows;
+        // last 페이지 구하기
+        // const last = Math.ceil(data.count/xize);
+        
+
         // 검색어 조건에 따른 동적 SQL 조건절 구성
         let whereSql = "";
         let bindParams = {};
